@@ -2,14 +2,14 @@
 # 📚 Despliegue de Drupal
 Este proyecto utiliza Docker y Docker Compose para desplegar un Drupal y una base de datos MariaDB de manera rápida y sencilla.
 
----
+
 
 ## 🛠️ Requisitos Previos
 Antes de comenzar, asegúrate de tener instalados en tu sistema:
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
----
+
 
 ## 🚀 Instalación y Puesta en Marcha
 
