@@ -36,17 +36,17 @@ Deberías ver dos contenedores en ejecución: **drupal_app**, y **drupal_db**.
 ### 4️⃣ Acceder a Drupal
 
   ```
-  http://localhost:8000
+  http://localhost:8080
   ```
 
 ## 🔄 Detener y Reiniciar los Contenedores
 Si deseas detener los contenedores en ejecución:
 ```bash
-docker-compose stop
+docker-compose down
 ```
 Para volver a iniciarlos:
 ```bash
-docker-compose start
+docker-compose up -d
 ```
 
 ## 🧹 Eliminar los Contenedores y Datos Persistentes

@@ -14,7 +14,7 @@ services:
     entrypoint: >
       sh -c "composer require drush/drush &&
       drush site-install standard --db-url=mysql://drupal:drupal@db/drupal
-      --site-name='Drupal Automático'
+      --site-name='onboarding-drupal'
       --account-name=admin
       --account-pass=admin -y &&
       apache2-foreground"
