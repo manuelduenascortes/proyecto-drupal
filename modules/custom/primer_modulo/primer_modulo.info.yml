@@ -1,0 +1,6 @@
+name: 'Primer módulo'
+type: module
+description: 'Un módulo de ejemplo para principiantes en Drupal.'
+package: 'Custom'
+core_version_requirement: ^10 || ^9
+dependencies: []

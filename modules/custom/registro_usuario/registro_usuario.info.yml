@@ -1,0 +1,7 @@
+name: 'Resgitros de Usuarios'
+type: 'module'
+description: 'Un módulo que implementa un registro de usuarios'
+package: 'custom'
+core_version_requirement: ^10 || ^9
+dependencies:
+  - drupal:block

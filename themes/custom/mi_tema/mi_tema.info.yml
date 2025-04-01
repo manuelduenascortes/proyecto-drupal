@@ -1,0 +1,17 @@
+name: 'Mi Tema'
+type: theme
+description: 'Un tema personalizado para Drupal.'
+package: Custom
+core_version_requirement: ^9 || ^10
+base theme: classy
+dependencies:
+  - classy:classy
+  - stable:stable
+libraries:
+  - mi_tema/estilos
+  - mi_tema/scripts
+regions:
+  header: 'Encabezado'
+  content: 'Contenido'
+  sidebar: 'Barra lateral'
+  footer: 'Pie de página'

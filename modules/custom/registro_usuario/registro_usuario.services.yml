@@ -1,0 +1,4 @@
+services:
+  registro_usuario.usuarios:
+    class: 'Drupal\registro_usuarios\Service\Usuarios'
+    arguments: []

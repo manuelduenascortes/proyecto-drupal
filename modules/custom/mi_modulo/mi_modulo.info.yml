@@ -1,0 +1,7 @@
+name: 'Mi Módulo'
+type: module
+description: 'Módulo que añade un bloque personalizado y uno que contiene un formulario.'
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:block

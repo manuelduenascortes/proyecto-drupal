@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Contiene funciones personalizadas para mi módulo de formulario.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_block_info().
+ */
+function mi_formulario_block_info() {
+  $blocks['MiFormularioBloque'] = [
+    'info' => t('Mi formulario personalizado'),
+    'cache' => DRUPAL_NO_CACHE,
+  ];
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function mi_formulario_block_view($delta = '') {
+  $block = [];
+
+  switch ($delta) {
+    case 'MiFormularioBloque':
+      $block['subject'] = t('Formulario con base de datos');
+      $block['content'] = \Drupal::formBuilder()->getForm('Drupal\mi_formulario\Form\MiFormulario');
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function mi_formulario_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Obtiene los valores del formulario.
+  $values = $form_state->getValues();
+
+  // Conéctate a la base de datos.
+  $connection = Database::getConnection();
+
+  // Inserta los datos en la tabla de la base de datos.
+  $connection->insert('mi_formulario_datos')
+    ->fields([
+      'nombre' => $values['nombre'],
+    ])
+    ->execute();
+
+  // Muestra un mensaje de confirmación.
+  \Drupal::messenger()->addMessage(t('¡Mensaje enviado!'));
+}

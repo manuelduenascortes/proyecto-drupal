@@ -1,0 +1,4 @@
+services:
+  primer_modulo.mi_servicio:
+    class: 'Drupal\primer_modulo\Service\MiServicio'
+    arguments: []
