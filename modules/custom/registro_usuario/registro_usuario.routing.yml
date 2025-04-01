@@ -1,7 +1,7 @@
 registro_usuario.usuarios:
   path: '/usuarios'
   defaults:
-    _controller: '\Drupal\registro_usuario\Controller\RegistroUsuarioController::mostrarUsuarios'
+    _controller: '\Drupal\registro_usuario\Controller\RegistroUsuariosController::mostrarUsuarios'
     _title: 'Usuarios registrados.'
   requirements:
     _permission: 'access content'

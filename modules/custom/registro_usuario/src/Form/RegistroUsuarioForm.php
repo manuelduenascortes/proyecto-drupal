@@ -29,7 +29,7 @@ class RegistroUsuarioForm extends FormBase {
   
       $form['email'] = [
         '#type' => 'textfield',
-        '#title' => $this->t('email'),
+        '#title' => $this->t('Email'),
         '#required' => TRUE,
       ];
 
@@ -46,7 +46,8 @@ class RegistroUsuarioForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $nombre = $form_state->getValue('nombre');
-    
+    $email = $form_state->getValue('email');
+
     // Insertar en la base de datos.
     $connection = Database::getConnection();
     $connection->insert('registro_usuario_datos')
@@ -57,6 +58,6 @@ class RegistroUsuarioForm extends FormBase {
       ])
       ->execute();
 
-    \Drupal::messenger()->addMessage($this->t('Felicidades, "@nombre". Tu usuario ha sido registrado.', ['@nombre' => $nombre]));
+    \Drupal::messenger()->addMessage($this->t('Felicidades, @nombre. Tu usuario ha sido registrado.', ['@nombre' => $nombre]));
   }
 }

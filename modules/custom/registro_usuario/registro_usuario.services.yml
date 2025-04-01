@@ -1,4 +1,4 @@
 services:
   registro_usuario.usuarios:
-    class: 'Drupal\registro_usuarios\Service\Usuarios'
+    class: 'Drupal\registro_usuario\Service\Usuarios'
     arguments: []

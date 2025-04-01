@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @Block(
  *   id = "registro_usuario_bloque",
- *   admin_label = @Translation("Bloque con Formulario para registrar usuarios"),
+ *   admin_label = @Translation("Formulario para registrar usuarios"),
  * )
  */
 
