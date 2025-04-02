@@ -29,7 +29,7 @@ class RegistroUsuarioForm extends FormBase {
   
       $form['email'] = [
         '#type' => 'textfield',
-        '#title' => $this->t('Email'),
+        '#title' => $this->t('Correo electrónico'),
         '#required' => TRUE,
       ];
 
@@ -48,16 +48,34 @@ class RegistroUsuarioForm extends FormBase {
     $nombre = $form_state->getValue('nombre');
     $email = $form_state->getValue('email');
 
-    // Insertar en la base de datos.
     $connection = Database::getConnection();
-    $connection->insert('registro_usuario_datos')
-      ->fields([
-        'nombre' => $nombre,
-        'email' => $email,
-        'creado' => time(),
-      ])
-      ->execute();
+    $query = $connection->select('registro_usuario_datos', 'RUD')
+          ->fields('RUD', ['email']);
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $record) {
+      if ($email === $record->email) {
+        $email = false;
+        \Drupal::messenger()->addError($this->t('El correo electrónico ya está en uso.'));
+      return;
+      }
+    }
 
-    \Drupal::messenger()->addMessage($this->t('Felicidades, @nombre. Tu usuario ha sido registrado.', ['@nombre' => $nombre]));
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+      if ($email === false) {
+        \Drupal::messenger()->addError($this->t('Correo electrónico no válido.'));
+      } else {       
+        $connection = Database::getConnection();
+        $connection->insert('registro_usuario_datos')
+          ->fields([
+            'nombre' => $nombre,
+            'email' => $email,
+            'creado' => time(),
+          ])
+          ->execute();
+
+        \Drupal::messenger()->addMessage($this->t('Felicidades, @nombre. Tu usuario ha sido registrado.', ['@nombre' => $nombre]));
+        \Drupal::logger('Nuevo Usuario')->notice($this->t('Se ha registrado un nuevo usuario con correo electrónico: @email.', ['@email' => $email]));
+      }
   }
 }

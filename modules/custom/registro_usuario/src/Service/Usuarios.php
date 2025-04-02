@@ -17,13 +17,12 @@ class Usuarios {
 
         $query = $connection->select('registro_usuario_datos', 'RUD')
             ->fields('RUD', ['id', 'nombre', 'email']);
-
         $result = $query->execute()->fetchAll();
 
         if (!empty($result)) {
             $message = 'Lista de usuarios:';
             foreach ($result as $record) {
-                $message .= '<br>Nombre: ' . $record->nombre . ', Email: ' . $record->email;
+                $message .= '<br>Nombre: ' . $record->nombre . '. Correo electrónico: ' . $record->email;
             }
             return ($this->t($message));
         } else {
