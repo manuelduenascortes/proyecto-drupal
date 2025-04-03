@@ -6,8 +6,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 class Usuarios {
-    use StringTranslationTrait;
-
+use StringTranslationTrait;
     public function mensajePersonalizado() {
         return "Esta es la lista de usuarios registrados.";
     }
