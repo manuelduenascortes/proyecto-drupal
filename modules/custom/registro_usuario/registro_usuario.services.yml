@@ -1,4 +1,5 @@
 services:
   registro_usuario.usuarios:
-    class: 'Drupal\registro_usuario\Service\Usuarios'
-    arguments: []
+    class: Drupal\registro_usuario\Service\Usuarios
+  registro_usuario.apiusuario:
+    class: Drupal\registro_usuario\Service\ApiUsuario

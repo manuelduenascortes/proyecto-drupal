@@ -5,3 +5,13 @@ registro_usuario.usuarios:
     _title: 'Usuarios registrados.'
   requirements:
     _permission: 'access content'
+
+registro_usuario.apiusuario:
+  path: '/api/usuario/{id}'
+  defaults:
+    _controller: '\Drupal\registro_usuario\Controller\RegistroUsuariosApiController::datosUsuario'
+    _title: 'Usuario.'
+    _format: 'json'
+  requirements:
+    _permission: 'access content'
+    _user_is_logged_in: 'TRUE'
