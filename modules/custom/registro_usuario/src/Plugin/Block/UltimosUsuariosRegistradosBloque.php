@@ -22,7 +22,7 @@ use StringTranslationTrait;
         $connection = Database::getConnection();
         $query = $connection->select('registro_usuario_datos', 'RUD')
             ->fields('RUD', ['nombre', 'creado'])
-            ->orderBy('RUD.nombre', 'ASC')
+            ->orderBy('RUD.id', 'DESC')
             ->range(0,5);
         $result = $query->execute()->fetchAll();
 

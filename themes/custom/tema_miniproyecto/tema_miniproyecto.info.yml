@@ -1,6 +1,6 @@
-name: 'Mi Tema'
+name: 'Tema mini proyecto'
 type: theme
-description: 'Un tema personalizado para Drupal.'
+description: 'Un tema personalizado para el mini proyecto Drupal.'
 package: Custom
 core_version_requirement: ^9 || ^10
 base theme: classy
@@ -8,8 +8,8 @@ dependencies:
   - classy:classy
   - stable:stable
 libraries:
-  - mi_tema/estilos
-  - mi_tema/scripts
+  - tema_miniproyecto/estilos
+  - tema_miniproyecto/scripts
 regions:
   header: 'Encabezado'
   content: 'Contenido'

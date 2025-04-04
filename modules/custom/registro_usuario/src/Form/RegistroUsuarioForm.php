@@ -21,6 +21,9 @@ class RegistroUsuarioForm extends FormBase {
      * {@inheritdoc}
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
+      $form['#attached']['library'][] = 'tema_miniproyecto/estilos';
+      $form['#attached']['library'][] = 'tema_miniproyecto/scripts';
+      
       $form['nombre'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Nombre'),
