@@ -20,13 +20,14 @@ class ApiUsuario {
     $connection = Database::getConnection();
     $query = $connection->select('registro_usuario_datos');
     $query->fields('registro_usuario_datos', ['id', 'nombre', 'email', 'creado']);
+    $query->condition('id', $id);
     $result = $query->execute()->fetchAssoc();
 
     if ($result) {
         $usuario = [
             'id' => $result['id'],
             'nombre' => $result['nombre'],
-            'emai' => $result['email'],
+            'email' => $result['email'],
             'creado' => date('Y-m-d H:i:s', $result['creado']),            
         ];
         return new JsonResponse($usuario);

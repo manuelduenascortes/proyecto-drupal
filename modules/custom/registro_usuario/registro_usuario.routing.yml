@@ -15,3 +15,11 @@ registro_usuario.apiusuario:
   requirements:
     _permission: 'access content'
     _user_is_logged_in: 'TRUE'
+
+registro_usuario.editar_usuario_form:
+  path: '/editar-usuario/{id}'
+  defaults:
+    _controller: '\Drupal\registro_usuario\Controller\EditarUsuarioController::editarUsuario'
+    _title: 'Editar usuario.'
+  requirements:
+    _permission: 'access content'
