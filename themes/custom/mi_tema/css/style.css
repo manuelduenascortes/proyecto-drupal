@@ -1,7 +1,30 @@
 body {
-    background-color: #8be4b3;
-  }
-  
-  h1 {
-    color: #151f4d;
-  }
+  background-color: #f9f9f9; /* Color de fondo suave */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna y legible */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centrado vertical y horizontal */
+  color: #333; /* Texto en gris oscuro */
+}
+
+h1 {
+  font-size: 3rem; /* Tamaño de fuente más grande */
+  font-weight: 600; /* Peso de fuente para hacerlo más elegante */
+  color: #000000; /* Color de texto más serio y elegante */
+  text-align: center; /* Centrar el texto */
+  text-transform: uppercase; /* Transformar a mayúsculas */
+  letter-spacing: 2px; /* Espaciado de letras para darle más estilo */
+  margin: 0;
+}
+
+p {
+  font-size: 1.1rem; /* Texto más pequeño y legible */
+  line-height: 1.6;
+  text-align: center;
+  color: #6c757d; /* Texto secundario gris claro */
+  max-width: 600px; /* Ancho máximo para que el texto no se expanda demasiado */
+  margin-top: 20px;
+}
