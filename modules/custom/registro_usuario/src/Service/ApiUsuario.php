@@ -3,36 +3,35 @@
 namespace Drupal\registro_usuario\Service;
 
 use Drupal\Core\Database\Database;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ApiUsuario {
-    use StringTranslationTrait;
+class UsuarioApiService {
     /**
-    * Obtiene contenido basado en el ID.
-    *
-    * @param int $id El ID del contenido.
-    *
-    * @return \Symfony\Component\HttpFoundation\JsonResponse
-    * Un objeto JsonResponse con el contenido.
-    */
-  public function datosUsuario($id) {
-    $connection = Database::getConnection();
-    $query = $connection->select('registro_usuario_datos');
-    $query->fields('registro_usuario_datos', ['id', 'nombre', 'email', 'creado']);
-    $query->condition('id', $id);
-    $result = $query->execute()->fetchAssoc();
-
-    if ($result) {
-        $usuario = [
-            'id' => $result['id'],
-            'nombre' => $result['nombre'],
-            'email' => $result['email'],
-            'creado' => date('Y-m-d H:i:s', $result['creado']),            
-        ];
-        return new JsonResponse($usuario);
-    } else {
-        return new JsonResponse(['mensaje' => 'Usuario no encontrado'], 404);
-    }
+     * Obtiene la información del usuario por ID.
+     *
+     * @param int $id El ID del usuario.
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * Respuesta JSON con los datos del usuario.
+     */
+    public function obtenerUsuarioPorId($id) {
+        $db = Database::getConnection();
+        $consulta = $db->select('registro_usuario_datos', 'RUD')
+            ->fields('RUD', ['id', 'nombre', 'email', 'creado'])
+            ->condition('id', $id)
+            ->execute()
+            ->fetchAssoc();
+        
+        if ($consulta) {
+            $usuario = [
+                'usuario_id' => $consulta['id'],
+                'nombre_completo' => $consulta['nombre'],
+                'correo_electronico' => $consulta['email'],
+                'fecha_registro' => date('Y-m-d H:i:s', $consulta['creado']),
+            ];
+            return new JsonResponse($usuario);
+        } else {
+            return new JsonResponse(['error' => 'Usuario no encontrado'], 404);
+        }
     }
 }

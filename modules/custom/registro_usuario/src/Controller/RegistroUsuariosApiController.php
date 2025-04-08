@@ -3,14 +3,14 @@
 namespace Drupal\registro_usuario\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\registro_usuario\Service\ApiUsuario;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Drupal\registro_usuario\Service\UsuarioApiService;
 
 class RegistroUsuariosApiController extends ControllerBase {
     protected $apiusuario;
 
-    public function __construct(ApiUsuario $apiusuario) {
+    public function __construct(UsuarioApiService $apiusuario) {
         $this->apiusuario = $apiusuario;
     }
 
@@ -18,10 +18,10 @@ class RegistroUsuariosApiController extends ControllerBase {
         return new static(
             $container->get('registro_usuario.apiusuario')
         );
-    } 
+    }
 
     public function datosUsuario($id) {
-        $datos = $this->apiusuario->datosUsuario($id);
+        $datos = $this->apiusuario->obtenerUsuarioPorId($id);
         return $datos;
     }
 }

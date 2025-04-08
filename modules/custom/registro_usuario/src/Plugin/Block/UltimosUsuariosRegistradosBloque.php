@@ -21,38 +21,27 @@ class UltimosUsuariosRegistradosBloque extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    // Establecer la conexión a la base de datos.
     $connection = Database::getConnection();
-    
-    // Hacer la consulta a la base de datos para obtener los últimos 5 usuarios.
     $query = $connection->select('registro_usuario_datos', 'RUD')
-      ->fields('RUD', ['nombre', 'creado'])
+      ->fields('RUD', ['id', 'nombre', 'creado'])
       ->orderBy('RUD.id', 'DESC')
-      ->range(0, 5);
-    
+      ->range(0, 5); // Solo los 5 últimos usuarios registrados
     $result = $query->execute()->fetchAll();
 
-    // Si hay resultados, crear el mensaje para mostrar los usuarios.
     if (!empty($result)) {
       $message = 'Últimos cinco usuarios registrados:';
-      
-      // Formatear los resultados con array_map.
-      $formatted_users = array_map(function ($record) {
-        return 'Nombre: ' . $record->nombre . '. Registrado: ' . date('Y-m-d h:i:s', $record->creado) . '.';
-      }, $result);
-      
-      // Unir los resultados formateados en un solo mensaje.
-      $message .= implode('<br>', $formatted_users);
-      
+      foreach ($result as $record) {
+        // Mostrar la ID del usuario, nombre y fecha de registro
+        $message .= '<br>ID: ' . $record->id . ' - Nombre: ' . $record->nombre . '. Registrado: ' . date('Y-m-d h:i:s', $record->creado) . '.';
+      }
       return [
         '#markup' => $this->t($message),
       ];
-    } 
-    // Si no hay resultados, mostrar mensaje alternativo.
-    else {
+    } else {
       return [
         '#markup' => $this->t('No se encontraron usuarios registrados.'),
       ];
     }
   }
 }
+

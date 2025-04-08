@@ -1,31 +1,31 @@
 <?php
 
-namespace Drupal\registro_usuario\Service;
+public function mensajeListaUsuarios() {
+    return "Aquí están los usuarios registrados en el sistema.";
+}
 
-use Drupal\Core\Database\Database;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-
-class Usuarios {
-use StringTranslationTrait;
-    public function mensajePersonalizado() {
-        return "Esta es la lista de usuarios registrados.";
-    }
-
-    public function listaUsuarios() {
-        $connection = Database::getConnection();
-
-        $query = $connection->select('registro_usuario_datos', 'RUD')
-            ->fields('RUD', ['id', 'nombre', 'email']);
-        $result = $query->execute()->fetchAll();
-
-        if (!empty($result)) {
-            $message = 'Lista de usuarios:';
-            foreach ($result as $record) {
-                $message .= '<br>Nombre: ' . $record->nombre . '. Correo electrónico: ' . $record->email;
-            }
-            return ($this->t($message));
-        } else {
-            return ($this->t('No se encontraron usuarios registrados.'));
+public function listarUsuariosRecientes() {
+    $connection = Database::getConnection();
+    $query = $connection->select('registro_usuario_datos', 'RUD')
+        ->fields('RUD', ['id', 'nombre', 'email', 'creado'])
+        ->orderBy('creado', 'DESC')
+        ->range(0, 10);
+    
+    $result = $query->execute()->fetchAll();
+    
+    if (!empty($result)) {
+        $usuarios = [];
+        foreach ($result as $record) {
+            $usuarios[] = [
+                'id' => $record->id,
+                'nombre' => $record->nombre,
+                'email' => $record->email,
+                'fecha_registro' => date('Y-m-d H:i:s', $record->creado),
+            ];
         }
+        
+        return new JsonResponse($usuarios);
+    } else {
+        return new JsonResponse(['mensaje' => 'No se encontraron usuarios registrados.'], 404);
     }
 }
